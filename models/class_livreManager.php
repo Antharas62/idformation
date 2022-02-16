@@ -1,5 +1,6 @@
 <?php
-require "./class_Model.php";
+require_once "./models/class_Model.php";
+require_once "./models/class_livre.php";
 
 
 class LivreManager extends Model{

@@ -1,14 +1,13 @@
 <?php
-require "./class_livre.php";
-require "./class_livreManager.php";
+// require "./models/class_livreManager.php";
 
 // $livre1 = new Livre(1,"Algorythmique selon H2PROG",300,"algo.png");
 // $livre2 = new Livre(2,"Le virus asiatique",200,"virus.png");
 // $livre3 = new Livre(3,"La france du 19ème",100,"france.png");
 // $livre4 = new Livre(4,"Le Javascript Client",500,"JS.png");
 
-$manager = new LivreManager();
-$manager -> chargementLivres();
+// $manager = new LivreManager();
+// $manager -> chargementLivres();
 
 // $manager -> ajoutLivre($livre1);
 // $manager -> ajoutLivre($livre2);
@@ -29,7 +28,6 @@ $manager -> chargementLivres();
   </thead>
   <tbody>
     <?php 
-    $livres = $manager -> getLivres();
     for ($i=0; $i < count($livres); $i++):?>
     <tr>
       <th><img src="./images/<?= $livres[$i]->getImage() ?>" width="60px"></th>
@@ -47,5 +45,5 @@ $manager -> chargementLivres();
 <?php
 $titre = "Les livres de la bibliothèque";
 $content = ob_get_clean();
-require "template.php";
+require "./views/template.view.php";
 
