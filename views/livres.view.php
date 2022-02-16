@@ -18,7 +18,7 @@
 <?php ob_start() ?>
 
 <table class="table text-center">
-  <thead class="bg-dark text-white">
+  <thead class="table-dark text-white">
     <tr>
       <th>Image</th>
       <th>Titre</th>
@@ -30,17 +30,21 @@
     <?php 
     for ($i=0; $i < count($livres); $i++):?>
     <tr>
-      <th><img src="./images/<?= $livres[$i]->getImage() ?>" width="60px"></th>
-      <td class="align-middle"><?= $livres[$i] -> getTitre() ?></td>
+      <td><img src="./images/<?= $livres[$i]->getImage() ?>" width="60px"></td>
+      <td class="align-middle"><a href="./livres/l/<?=$livres[$i]->getId() ?>"><?= $livres[$i] -> getTitre() ?></a></td>
       <td class="align-middle"><?= $livres[$i] -> getNbPages() ?></td>
-      <td class="align-middle"><a href="" class="btn btn-warning">Modifier</a></td>
-      <td class="align-middle"><a href="" class="btn btn-danger">Supprimer</a></td>
+      <td class="align-middle"><a href="./livres/m/<?=$livres[$i]->getId() ?>" class="btn btn-warning">Modifier</a></td>
+      <td class="align-middle">
+        <form method="POST" action="<?= URL ?>livres/s/<?= $livres[$i]->getId(); ?>" onSubmit="return confirm('Voulez-vous vraiment supprimer le livre ?');">
+            <button class="btn btn-danger" type="submit">Supprimer</button>
+        </form>
+      </td>
     </tr>
     <?php endfor ?>
   </tbody>
 </table>
 
-<a href="" class="btn btn-success d-block">Ajouter</a>
+<a href="./livres/a" class="btn btn-success d-block">Ajouter</a>
 
 <?php
 $titre = "Les livres de la bibliothèque";
