@@ -18,12 +18,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    getMovies();
-  }
-
-  void getMovies() async {
-    final dataProvider = Provider.of<DataRepositories>(context, listen: false);
-    await dataProvider.getPopularMovies();
   }
 
   @override
