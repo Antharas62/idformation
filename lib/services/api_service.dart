@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_netflix/services/api.dart';
+import 'package:flutter_netflix/models/movie.dart';
 
 class APIService {
   final API api = API();
@@ -11,7 +12,7 @@ class APIService {
 
     //constructiion des parametres
     //parametre present dans chaque requete
-    Map<String,dynamic> query = {
+    Map<String, dynamic> query = {
       "api_key": api.apikey,
       "language": "fr_FR",
     };
@@ -29,8 +30,27 @@ class APIService {
     } else {
       throw response;
     }
+  } // getdata
 
+  Future<List<Movie>> getPopularMovies({required int pageNumber}) async {
+
+    Response response = await getData('/movie/popular', params: {
+      "page": pageNumber,
+    });
+
+    if(response.statusCode == 200){
+      Map data = response.data;
+      List<dynamic> results = data['results'];
+      List<Movie> movies = [];
+      for(Map<String,dynamic> json in results){
+        Movie movie = Movie.fromJson(json);
+        movies.add(movie);
+      }
+
+      return movies;
+    } else {
+      throw response;
+    }
   }
-
 
 }
