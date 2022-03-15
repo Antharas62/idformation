@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix/repositories/data_repositories.dart';
 import 'package:flutter_netflix/services/api_service.dart';
+import 'package:flutter_netflix/ui/widgets/movie_card.dart';
+import 'package:flutter_netflix/ui/widgets/movie_categorie.dart';
 import "package:flutter_netflix/utils/constant.dart";
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_netflix/models/movie.dart';
@@ -31,94 +33,27 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: ListView(
         children: [
-          Container(
+          SizedBox(
             height: 500,
-            color: Colors.red,
-            child: (dataProvider.popularMovieList.isEmpty) ? const Text("Null Value") : Image.network(
-              dataProvider.popularMovieList[0].posterURL(),
-              fit: BoxFit.cover,
-              ),
+            child: MovieCard(movie: dataProvider.popularMovieList.first)
           ),
-          const SizedBox(height: 15),
-          Text(
-          "Tendances actuelles",
-          style: GoogleFonts.poppins(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          )
+          MovieCategorie(
+            imageHeight: 160,
+            imageWidth: 110,
+            label: "Tendance actuelle",
+            movieList: dataProvider.popularMovieList,
           ),
-          const SizedBox(height: 5),
-          SizedBox(
-            height: 160,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 10,
-              itemBuilder: (BuildContext context, int index){
-                return Container(
-                  margin: const EdgeInsets.only(right: 8),
-                  width: 110,
-                  color: Colors.yellow,
-                  child: (dataProvider.popularMovieList.isEmpty) ? Center(
-                    child: Text(index.toString()),
-                  ) : Image.network(dataProvider.popularMovieList[index + 1].posterURL(),fit: BoxFit.cover),
-                );
-              }
+          MovieCategorie(
+            imageHeight: 320,
+            imageWidth: 220,
+            label: "Actuellement au cinéma",
+            movieList: dataProvider.popularMovieList,
           ),
-          ),
-          const SizedBox(height: 15),
-          Text(
-          "Actuellement au cinéma",
-          style: GoogleFonts.poppins(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          )
-          ),
-          const SizedBox(height: 5),
-          SizedBox(
-            height: 320,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 10,
-              itemBuilder: (BuildContext context, int index){
-                return Container(
-                  margin: const EdgeInsets.only(right: 8),
-                  width: 220,
-                  color: Colors.blue,
-                  child: Center(
-                    child: Text(index.toString()),
-                  ),
-                );
-              }
-          ),
-          ),
-          const SizedBox(height: 15),
-          Text(
-          "Bientôt Disponible",
-          style: GoogleFonts.poppins(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          )
-          ),
-          const SizedBox(height: 5),
-          SizedBox(
-            height: 160,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 10,
-              itemBuilder: (BuildContext context, int index){
-                return Container(
-                  margin: const EdgeInsets.only(right: 8),
-                  width: 110,
-                  color: Colors.green,
-                  child: Center(
-                    child: Text(index.toString()),
-                  ),
-                );
-              }
-          ),
+          MovieCategorie(
+            imageHeight: 160,
+            imageWidth: 110,
+            label: "Bientôt Disponible",
+            movieList: dataProvider.popularMovieList,
           ),
         ],
       ),
