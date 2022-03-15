@@ -42,21 +42,22 @@ class _HomeScreenState extends State<HomeScreen> {
             imageWidth: 110,
             label: "Tendance actuelle",
             movieList: dataProvider.popularMovieList,
+            callback: dataProvider.getPopularMovies,
           ),
-          MovieCategorie(
-            imageHeight: 320,
-            imageWidth: 220,
-            label: "Actuellement au cinéma",
-            movieList: dataProvider.popularMovieList,
-          ),
-          MovieCategorie(
-            imageHeight: 160,
-            imageWidth: 110,
-            label: "Bientôt Disponible",
-            movieList: dataProvider.popularMovieList,
-          ),
+          // MovieCategorie(
+          //   imageHeight: 320,
+          //   imageWidth: 220,
+          //   label: "Actuellement au cinéma",
+          //   movieList: dataProvider.popularMovieList,
+          // ),
+          // MovieCategorie(
+          //   imageHeight: 160,
+          //   imageWidth: 110,
+          //   label: "Bientôt Disponible",
+          //   movieList: dataProvider.popularMovieList,
+          // ),
         ],
       ),
-      );
+    );
   }
 }
