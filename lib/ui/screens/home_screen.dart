@@ -58,6 +58,20 @@ class _HomeScreenState extends State<HomeScreen> {
             movieList: dataProvider.upcomingMoviesList,
             callback: dataProvider.getUpcomingMovies,
           ),
+          MovieCategorie(
+            imageHeight: 160,
+            imageWidth: 110,
+            label: "Animation",
+            movieList: dataProvider.animationMoviesList,
+            callback: dataProvider.getAnimationMovies,
+          ),
+          MovieCategorie(
+            imageHeight: 160,
+            imageWidth: 110,
+            label: "Science Fiction",
+            movieList: dataProvider.fantastiqueMoviesList,
+            callback: dataProvider.getFantastiqueMovies,
+          ),
         ],
       ),
     );

@@ -26,6 +26,7 @@ class APIService {
     final response = await dio.get(_url, queryParameters: query);
     //check si tout s'est bien passer
     if(response.statusCode == 200){
+      print(_url + query.toString());
       return response;
     } else {
       throw response;
@@ -75,6 +76,44 @@ class APIService {
 
     Response response = await getData('/movie/upcoming', params: {
       "page": pageNumber,
+    });
+
+    if(response.statusCode == 200){
+      Map data = response.data;
+      List<Movie> movies = data["results"].map<Movie>((dynamic movieJson){
+        return Movie.fromJson(movieJson);
+      }).toList();
+
+      return movies;
+    } else {
+      throw response;
+    }
+  }
+
+  Future<List<Movie>> getAnimationMovies({required int pageNumber}) async {
+
+    Response response = await getData('/discover/movie', params: {
+      "page": pageNumber,
+      "with_genres": "16",
+    });
+
+    if(response.statusCode == 200){
+      Map data = response.data;
+      List<Movie> movies = data["results"].map<Movie>((dynamic movieJson){
+        return Movie.fromJson(movieJson);
+      }).toList();
+
+      return movies;
+    } else {
+      throw response;
+    }
+  }
+
+  Future<List<Movie>> getFantastiqueMovies({required int pageNumber}) async {
+
+    Response response = await getData('/discover/movie', params: {
+      "page": pageNumber,
+      "with_genres": "878",
     });
 
     if(response.statusCode == 200){
