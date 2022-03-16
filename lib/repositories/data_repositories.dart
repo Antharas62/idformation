@@ -85,6 +85,7 @@ class DataRepositories with ChangeNotifier{
   Future<Movie> getMovieDetails({required Movie movie}) async {
     try {
       Movie newMovie = await apiService.getMovieDetails(movie: movie);
+      newMovie = await apiService.getMovieVideo(movie: newMovie);
       return newMovie;
     } on Response catch (response) {
       print("ERROR: ${response.statusCode}");
@@ -92,6 +93,8 @@ class DataRepositories with ChangeNotifier{
     }
 
   }
+
+
 
 
 

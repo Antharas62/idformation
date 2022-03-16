@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_netflix/models/movie.dart';
 import 'package:flutter_netflix/repositories/data_repositories.dart';
+import 'package:flutter_netflix/ui/widgets/My_Video_Player.dart';
 import 'package:flutter_netflix/ui/widgets/action_buttun.dart';
 import 'package:flutter_netflix/ui/widgets/movie_info.dart';
 import 'package:flutter_netflix/utils/constant.dart';
@@ -51,6 +52,16 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                     height: 220,
                     width: MediaQuery.of(context).size.width,
                     color: Colors.red,
+                    child: (newMovie!.videos!.isEmpty)
+                        ? Center(
+                            child: Text(
+                              "Pas de vidéo disponible",
+                              style: GoogleFonts.poppins(
+                                color: Colors.white,
+                              ),
+                            ),
+                          )
+                        : MyVideoPlayer(movieId: newMovie!.videos!.first),
                   ),
                   MovieInfo(movie: newMovie!),
                   const SizedBox(height: 10),

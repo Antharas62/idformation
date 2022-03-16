@@ -14,7 +14,7 @@ class APIService {
     //parametre present dans chaque requete
     Map<String, dynamic> query = {
       "api_key": api.apikey,
-      "language": "fr_FR",
+      "language": "fr-FR",
     };
 
     //si params n'est pas null ont ajoute les parametre a query
@@ -142,6 +142,34 @@ class APIService {
         genres: genreList,
         releaseDate: _data["release_date"],
         vote: _data["vote_average"],
+      );
+
+      return newMovie;
+    } else {
+      throw response;
+    }
+  }
+
+  Future<Movie> getMovieVideo({required Movie movie}) async {
+    Response response = await getData('/movie/${movie.id}/videos');
+
+  if(response.statusCode == 200){
+      Map<String,dynamic> _data = response.data;
+
+      //Ma methode
+      // List<dynamic> videos = _data["results"];
+      // List<String> video = videos.map((item) {
+      //   return item["key"] as String;
+      // }).toList();
+
+      //Methode sans variable tempon
+      List<String> videos = _data["results"].map<String>((item) {
+        return item["key"] as String;
+      }).toList();
+
+
+      Movie newMovie = movie.copyWith(
+        videos: videos,
       );
 
       return newMovie;
