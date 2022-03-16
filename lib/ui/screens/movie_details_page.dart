@@ -3,6 +3,8 @@ import 'package:flutter_netflix/models/movie.dart';
 import 'package:flutter_netflix/repositories/data_repositories.dart';
 import 'package:flutter_netflix/ui/widgets/My_Video_Player.dart';
 import 'package:flutter_netflix/ui/widgets/action_buttun.dart';
+import 'package:flutter_netflix/ui/widgets/casting_card.dart';
+import 'package:flutter_netflix/ui/widgets/galerie_card.dart';
 import 'package:flutter_netflix/ui/widgets/movie_info.dart';
 import 'package:flutter_netflix/utils/constant.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -77,6 +79,48 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                     icon: Icons.download,
                     bgColor: Colors.grey.withOpacity(0.3),
                     color: Colors.white,
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    newMovie!.description,
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 15,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    "Casting",
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 350,
+                    child: ListView.builder(
+                      itemCount: newMovie!.casting!.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, int index) {
+                        return (newMovie!.casting![index].imageURL == null)
+                            ? const Center()
+                            : CastingCard(person: newMovie!.casting![index]);
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    height: 200,
+                    child: ListView.builder(
+                      itemCount: newMovie!.images!.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, int index) {
+                        return GalerieCard(
+                          posterPath: newMovie!.images![index],
+                        );
+                      },
+                    ),
                   ),
                 ],
               ));
